@@ -1,0 +1,29 @@
+development:
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: berylapp_config_dev
+  pool: 5
+  username: root
+  password:
+  host: localhost
+
+test: &TEST
+  adapter: mysql
+  encoding: utf8
+  reconnect: false
+  database: berylapp_config_test
+  pool: 5
+  username: root
+  password:
+  host: localhost
+
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: berylapp_config_prod
+  username: postgres
+  password: postgres
+
+cucumber:
+  <<: *TEST

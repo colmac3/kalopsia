@@ -1,0 +1,11 @@
+rpm/build
+.bundle
+rpm/pkg
+.idea
+*.log
+*~
+*.swp
+rpm/application.spec
+.DS_Store
+.rvmrc
+lib/config.dat

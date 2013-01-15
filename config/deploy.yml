@@ -1,0 +1,6 @@
+app_name: "kalopsia"
+repo: "berylapp@berylapp.com:repo/kalopsia.git"
+base_path: "/home/berylapp/rails/rtml_apps"
+ip: "63.247.66.236"
+user: berylapp
+scm: git

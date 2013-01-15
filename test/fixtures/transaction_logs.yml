@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  processor: MyString
+  merchant_id: MyString
+  merchant_key: MyString
+  transaction: MyText
+  result: MyText
+
+two:
+  processor: MyString
+  merchant_id: MyString
+  merchant_key: MyString
+  transaction: MyText
+  result: MyText

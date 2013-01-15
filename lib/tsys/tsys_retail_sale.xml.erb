@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<InfoNox_Interface>
+<TransNox_API_Interface>
+  <CardRQ>
+  	<Host_Info>
+      <Host_ID>88880000008701H</Host_ID>
+      <Host_Password>TEST</Host_Password>
+	</Host_Info>
+    <Device_Info>
+      <Merchant_ID><%= merc_id %></Merchant_ID>
+      <Device_ID><%= device_id %></Device_ID>
+      <Operator><%= operator %></Operator>
+      <Password><%= password %></Password>
+    </Device_Info>
+    <Transaction_Info>
+      <Service_Code>CREDIT</Service_Code>
+      <SubServiceCode>AUTH</SubServiceCode>
+      <Type>SETTLE</Type>
+      <Requested_Amount><%= txn[:amount].to_i %></Requested_Amount>
+      <Amount><%= txn[:amount].to_i %></Amount>
+      <Time_Stamp><%= Time.now.strftime("%m/%d/%Y %H:%M:%S") %></Time_Stamp>
+      <Transaction_ID><%= txn[:ton] %></Transaction_ID>
+      <Tax><%= txn[:tax].to_i %></Tax>
+    </Transaction_Info>
+    <Card_Info>
+      <Type><%= txn[:card_type] %></Type>
+      <Number><%= txn[:card_pan] %></Number>
+      <ExpirationDate><%= txn[:card_expiry_date].strftime("%Y%m") %></ExpirationDate>
+      <CVV2></CVV2>
+      <Track1><%= txn[:card_iso1_track] %></Track1>
+      <Track2><%= txn[:card_iso2_track] %></Track2>
+      <Entry_Mode>SWIPE</Entry_Mode>
+      <Cardholder>PRESENT</Cardholder>
+    </Card_Info>
+  </CardRQ>
+</TransNox_API_Interface>
+</InfoNox_Interface>

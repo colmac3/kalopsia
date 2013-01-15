@@ -1,0 +1,7 @@
+credit_sale_100:
+  data: credit_sale_100 (Rtml::MagCardData)
+  mode: "credit"
+  input_type: :swiped
+  pan: "4111111111111111"
+  expiry_date: 2010-12-01 00:00:00 Z
+  issue_number: 0

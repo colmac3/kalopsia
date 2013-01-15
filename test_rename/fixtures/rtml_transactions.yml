@@ -1,0 +1,32 @@
+credit_sale_100:
+  terminal: credit_sale_100
+  card: credit_sale_100
+  txn_mode: "online"
+  post_id: 2558
+  amount: 100
+  action: "sale"
+  txn_type: "debit"
+  amount_other: 0
+  state: :new
+
+credit_force_100:
+  terminal: credit_sale_100
+  card: credit_sale_100
+  txn_mode: "online"
+  post_id: 2558
+  amount: 100
+  action: "force_sale"
+  txn_type: "debit"
+  amount_other: 0
+  state: :new
+
+credit_return_100:
+  terminal: credit_sale_100
+  card: credit_sale_100
+  txn_mode: "online"
+  post_id: 2558
+  amount: 100
+  action: "sale_return"
+  txn_type: "debit"
+  amount_other: 0
+  state: :new

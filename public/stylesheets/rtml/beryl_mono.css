@@ -1,0 +1,17 @@
+.menu{text-indent: 15%;}
+div.title{background-color: #000000; color: #FFFFFF; width: 100%; margin: 1px;}
+span.title{background-color: #000000; color: #FFFFFF; font-size: x-small; font-weight: bold; text-align: center; vertical-align: middle;}
+span.center{vertical-align: middle; text-align: center;}
+div.message{height: 100%; }
+span.message{ font-size: x-small; text-align: center;}
+span{font-size: x-small;}
+screen{font-size: x-small;}
+h1{text-align: center;}
+table.message{text-align: center; vertical-align: middle; height: 100%; width: 100%;}
+table.warning{text-align: center; vertical-align: middle; height: 100%; width: 100%;}
+div.menu{ width: 100%; text-align: left; font-size: medium; text-indent: 15%;}
+
+.bold { font-weight: bold; }
+.large { font-size: large; }
+.small { font-size: small; }
+

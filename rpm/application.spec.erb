@@ -1,0 +1,100 @@
+<%=tag :name%>
+<%=tag :version%>
+<%=tag :summary%>
+<%=tag :license, licenses.join("; ")%>
+<%=tag :url%>
+<%=tag :requires, runtime_dependencies%>
+<%=tag :requires, rpm_dependencies%>
+Release: <%=increment_release_number%>
+Group: Ruby/RubyGems
+Source: %{name}-%{version}.tar.gz
+BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-XXXXXX)
+Requires: ruby-enterprise >= 1.8.7
+Requires: ruby-enterprise-rubygems >= 1.5.2
+Requires: ruby-enterprise-rubygem-bundler
+Requires: ruby-enterprise-rubygem-pg
+Requires: ruby-enterprise-rubygem-passenger-selinux
+
+%description
+<%=description%>
+
+# ruby definitions
+%define _ruby /opt/ruby-enterprise
+%define _rake %{_ruby}/bin/rake
+%define _bundle %{_ruby}/bin/bundle
+
+# rails definitions
+%define _rails_root /usr/local/Ingenico/<%=name.to_s.gsub(/(^|_)(.)/) { |m| $~[2].upcase }%>
+%define _rails_env production
+%define _rails_config %{_sysconfdir}/ingenico/<%=name%>
+
+# misc definitions
+%define _rakefile %{_rails_root}/Rakefile
+%define _db_migrate db:migrate
+
+%prep
+cur=`pwd`
+mkdir -p $RPM_SOURCE_DIR/rails
+cd $RPM_SOURCE_DIR/rails
+<%project_files.each do |file|%>
+  cp -r <%=file%> $RPM_SOURCE_DIR/rails/<%=File.basename(file)%>
+<%end%>
+# bundler adds "-rbundler/setup" which is no good for us, so we need to reset RUBYOPT
+RUBYOPT= \
+	BUNDLE_GEMFILE=$RPM_SOURCE_DIR/rails/Gemfile \
+	bundle install --local --path vendor/gems --without test cucumber development
+RUBYOPT= \
+	BUNDLE_GEMFILE=$RPM_SOURCE_DIR/rails/Gemfile \
+	bundle package
+# --without test cucumber development
+cd $cur
+%setup -q
+
+%build
+cur=`pwd`
+cd $RPM_SOURCE_DIR
+mkdir -p %{buildroot}/%{_rails_root}
+cp -r $RPM_SOURCE_DIR/rails/.bundle $RPM_SOURCE_DIR/rails/* %{buildroot}/%{_rails_root}
+# RUBYOPT= \
+#	BUNDLE_GEMFILE=%{buildroot}/%{_rails_root}/Gemfile \
+#	bundle install --local --path vendor/gems --without test cucumber development
+cd $cur
+
+%install
+%{__mkdir} -p %{buildroot}/%{_rails_config}
+%{__cp} %{buildroot}/%{_rails_root}/config/database.yml %{buildroot}/%{_rails_config}/database.yml
+%{__cp} %{buildroot}/%{_rails_root}/config/environments/production.rb %{buildroot}/%{_rails_config}/config.rb
+rm %{buildroot}/%{_rails_root}/config/database.yml
+rm %{buildroot}/%{_rails_root}/config/environments/production.rb
+/bin/ln -fs %{_rails_config}/database.yml %{buildroot}/%{_rails_root}/config/database.yml
+/bin/ln -fs %{_rails_config}/config.rb %{buildroot}/%{_rails_root}/config/environments/production.rb
+%{__mkdir} -p %{buildroot}/%{_sysconfdir}/httpd/conf.d
+%{__cp} %{buildroot}/%{_rails_root}/config/httpd.conf %{buildroot}/%{_sysconfdir}/httpd/conf.d/<%=name%>.conf
+
+%files
+%defattr(-,kalopsia,kalopsia,-)
+%{_rails_root}
+%config(noreplace) %{_sysconfdir}/httpd/conf.d/<%=name%>.conf
+%config(noreplace) %{_rails_config}/database.yml
+%config(noreplace) %{_rails_config}/config.rb
+
+%clean
+rm -rf %{buildroot}
+
+# pre-installation
+%pre
+
+# post-installation
+%post
+# debug - echo "BUNDLE_GEMFILE=%{_rails_root}/Gemfile %{_bundle} exec %{_rake} -f %{_rakefile} %{_db_migrate} RAILS_ENV=%{_rails_env}"
+# BUNDLE_GEMFILE=%{_rails_root}/Gemfile %{_bundle} exec %{_rake} -f %{_rakefile} %{_db_migrate} RAILS_ENV=%{_rails_env}
+
+# pre-uninstallation
+%preun
+
+# post-uninstallation
+%postun
+
+# changelog
+%changelog
+

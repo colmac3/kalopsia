@@ -1,0 +1,8 @@
+Use this README file to introduce your application and point to useful places in the API for learning more.
+Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+
+URL for testing kalopsia to sage backend
+http://localhost:3000/payment_gateway/authorize?amount=100&auth_code=&c_address=&c_zip=&card_expiry_date=Sat+Dec+01+05%3A00%3A00+UTC+2012&card_input_type=swiped&card_iso2_track=371449635392376%3D1212030765713&card_mode=credit&card_pan=371449635392376&card_pin_block=&cash_back_amt=0&invoice_num=&merchant_id=869440795604&merchant_key=Y7Q7Q7C7G7A7&processor=sage&shipping=&tax=0&ton=3262&txn_type=sale
+
+

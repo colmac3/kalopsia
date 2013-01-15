@@ -1,0 +1,7 @@
+rtml_frmwk_test_card:
+   card_type:
+   card: rtml_frmwk_test_credit_card
+   verdict: online
+   cvm: 
+   reject_reason: 
+   cvr: failed

@@ -1,0 +1,55 @@
+#print "Deploy to (S)taging or (P)roduction [S]? "
+#choice = (((choice = $stdin.gets.downcase.chomp[0]).nil?) ? 's' : choice.chr)
+
+berylpw = Capistrano::CLI.password_prompt('BerylApp password:')
+
+print "SVN username: "
+scm_username = $stdin.gets.chomp
+
+scmpw = Capistrano::CLI.password_prompt('SVN password:')
+subdomain = 'kalopsia'
+
+puts "Deploying to #{subdomain}.berylapp.com..."
+puts
+puts "Press Enter to confirm, Control-C to cancel"
+$stdin.gets
+
+task :post_deploy do
+end
+
+default_run_options[:pty] = true 
+set :application, subdomain
+set :deploy_to, "/home/berylapp/rails/rtml_apps/#{subdomain}.berylapp.com"
+set :repository,  "https://svn.ingenico.com/NARREPOSITORY/kalopsia/"
+set :keep_releases, 3
+set :use_sudo, false
+
+set :scm_username, scm_username
+set :scm_password, scmpw
+
+role :app, "63.247.66.236"
+role :web, "63.247.66.236"
+role :db,  "63.247.66.236", :primary => true
+set :user, "berylapp"
+set :password, berylpw
+set :deploy_via, :export
+
+after "deploy:update_code", :post_deploy
+after "deploy:setup", :post_deploy
+
+
+namespace :deploy do
+	task :start, :roles => :app do
+		run "touch #{current_release}/tmp/restart.txt"
+	end
+
+	task :stop, :roles => :app do
+		# do nothing
+	end
+
+	desc "Restart Application"
+	task :restart, :roles => :app do
+		run "touch #{current_release}/tmp/restart.txt"
+	end
+end
+

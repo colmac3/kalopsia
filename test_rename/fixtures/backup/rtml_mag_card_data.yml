@@ -1,0 +1,12 @@
+rtml_frmwk_test_card:
+   iso1_track: B4536055022727704^ RTML FRMWK TEST CARD^1012120049065502272772
+   iso2_track: 4536055022727704=10121200490600000002
+   service_code: 120
+   iso3_track: 
+
+rtml_frmwk_test_debit_card:
+   iso1_track: B9999999800002773^PAYMENTECH^10121015432112345678
+   iso2_track: 9999999800002773=10121015432112345678
+   service_code: NA
+   iso3_track:
+

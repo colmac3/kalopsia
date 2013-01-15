@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<InfoNox_Interface>
+<TransNox_API_Interface>
+  <CardRQ>
+  	<Host_Info>
+      <Host_ID>88880000008701H</Host_ID>
+      <Host_Password>TEST</Host_Password>
+	</Host_Info>
+    <Device_Info>
+      <Merchant_ID><%= merc_id %></Merchant_ID>
+      <Device_ID><%= device_id %></Device_ID>
+      <Operator><%= operator %></Operator>
+      <Password><%= password %></Password>
+    </Device_Info>
+    <Transaction_Info>
+      <Service_Code>CREDIT</Service_Code>
+      <SubServiceCode>REVERSAL</SubServiceCode>
+      <Type>RETURN</Type>
+      <Requested_Amount><%= txn[:amount].to_i %></Requested_Amount>
+      <Amount><%= txn[:amount].to_i %></Amount>
+      <Time_Stamp><%= Time.now.strftime("%m/%d/%Y %H:%M:%S") %></Time_Stamp>
+      <Transaction_ID><%= txn[:reference_code] %></Transaction_ID>
+      <Tax><%= txn[:tax].to_i %></Tax>
+    </Transaction_Info>
+  </CardRQ>
+</TransNox_API_Interface>
+</InfoNox_Interface>

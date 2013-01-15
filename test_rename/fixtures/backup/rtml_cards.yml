@@ -1,0 +1,23 @@
+rtml_frmwk_test_credit_card:
+   input_type: :swiped
+   expiry_date: 2010-12-01 00:00:00 Z
+   scheme: VISA
+   pan: "4536055022727704"
+   cardholder_name: "RTML FRMWK TEST CRDT CARD "
+   issue_number: 0
+   data: rtml_frmwk_test_card (Rtml::MagCardData)
+   issuer_name: NA
+   mode: credit
+   effective_date: 
+
+rtml_frmwk_test_debit_card:
+   input_type: :swiped
+   expiry_date: 2010-12-01 00:00:00 Z
+   scheme: DEBIT
+   pan: "9999999800002773"
+   cardholder_name: "RTML FRMWK TEST DEBIT CARD"
+   issue_number: 0
+   data: rtml_frmwk_test_debit_card (Rtml::MagCardData)
+   effective_date:
+   mode: debit
+   issuer_name: NA
